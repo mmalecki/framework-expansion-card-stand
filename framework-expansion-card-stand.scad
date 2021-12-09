@@ -24,7 +24,7 @@ slots = 1;
 module usb_c_plug () {
   hull () {
     cylinder (usb_c_plug_depth, usb_c_plug_height / 2, usb_c_plug_height / 2);
-    translate([0, usb_c_plug_width, 0])
+    translate([0, usb_c_plug_width - usb_c_plug_height, 0])
       cylinder (usb_c_plug_depth, usb_c_plug_height / 2, usb_c_plug_height / 2);
   }
 }
@@ -32,7 +32,7 @@ module usb_c_plug () {
 module slot_base () {
   difference () {
     cube([height + wall_thickness * 2, width + wall_thickness * 2, base_depth]);
-    translate([wall_thickness + (height / 2), wall_thickness + (width - usb_c_plug_width) / 2, base_depth - usb_c_plug_depth])
+    translate([wall_thickness + (height / 2), wall_thickness + ((width - usb_c_plug_width + usb_c_plug_height) / 2), base_depth - usb_c_plug_depth])
       usb_c_plug();
   }
 }
