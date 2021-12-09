@@ -6,16 +6,15 @@ wall_thickness = 1.5;
 // For full-size depth:
 // depth = 32;
 // Mini version:
-
+depth = 10;
 padding = 1.02;
 height = 6.9 * padding;
 width = 30 * padding;
-depth = 10;
 
 // For no base, set this to value smaller than USB-C plug depth:
-base_depth = 8;
+base_depth = 7.5;
 
-plug_padding = 1.01;
+plug_padding = 1.03;
 usb_c_plug_width = 8.25 * plug_padding;
 usb_c_plug_height = 2.4 * plug_padding;
 usb_c_plug_depth = 6.5;
