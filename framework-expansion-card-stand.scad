@@ -47,4 +47,7 @@ module slot () {
     };
 }
 
-slot();
+for (i = [0 : slots - 1]) {
+  translate([(height + wall_thickness) * i, 0, 0])
+    slot();
+}
