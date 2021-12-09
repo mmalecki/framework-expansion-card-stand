@@ -1,4 +1,4 @@
-$fn = 200;
+$fn = 500;
 wall_thickness = 1.5;
 
 // To render the base only:
