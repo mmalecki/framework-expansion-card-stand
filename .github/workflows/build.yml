@@ -12,7 +12,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Build the STL file
-        uses: pkoehlers/openscad-build-action@master
+        uses: mmalecki/openscad-build-action@optional-parameter-sets
         with:
           input-file: 'framework-expansion-card-stand.scad'
           output-file: 'framework-expansion-card-stand.stl'
