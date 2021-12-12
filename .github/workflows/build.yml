@@ -25,9 +25,8 @@ jobs:
           customizer-parameter-file: 'parameters.json'
           customizer-parameter-set: ${{ matrix.parameter-set }}
 
-      - uses: EndBug/add-and-commit@v7
+      - name: Upload the built STL file
+        uses: actions/upload-artifact@v2
         with:
-          add: 'framework-expansion-card-stand.stl'
-          default_author: github_actions
-          message: 'Build the STL file'
-          push: true
+          name: ${{ matrix.parameter-set }}
+          path: 'framework-expansion-card-stand-${{ matrix.parameter-set }}.stl'
