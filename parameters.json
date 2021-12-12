@@ -1,0 +1,14 @@
+{
+  "parameterSets": {
+    "1-slot": {
+      "slots": 1
+    },
+    "4-slot": {
+      "slots": 4
+    },
+    "4-slot-mini": {
+      "base_depth": 4,
+      "depth": 7
+    }
+  }
+}

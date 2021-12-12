@@ -6,6 +6,12 @@ on:
 jobs:
   build:
     name: Build
+    strategy:
+      matrix:
+        parameter-set:
+          - 1-slot
+          - 4-slot
+          - 4-slot-mini
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -15,7 +21,9 @@ jobs:
         uses: mmalecki/openscad-build-action@optional-parameter-sets
         with:
           input-file: 'framework-expansion-card-stand.scad'
-          output-file: 'framework-expansion-card-stand.stl'
+          output-file: 'framework-expansion-card-stand-${{ matrix.parameter-set }}.stl'
+          customizer-parameter-file: 'parameters.json'
+          customizer-parameter-set: ${{ matrix.parameter-set }}
 
       - uses: EndBug/add-and-commit@v7
         with:
