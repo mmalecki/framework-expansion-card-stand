@@ -1,45 +1,51 @@
-$fn = 500;
+$fn = 200;
 wall_thickness = 1.5;
 
-// To render the base only:
-// depth = 0;
-// For full-size depth:
-// depth = 32;
-// Mini version:
-depth = 10;
+tight_fit = 0.1;
+fit = 0.2;
+loose_fit = 0.5;
 
-// For printing on the Anycubic Vyper in PLA:
-// padding = 1.04;
-// Default:
-padding = 1.02;
-height = 6.9 * padding;
-width = 30 * padding;
+// Depth of the sleeve
+depth = 10; // [0: Base only, 10: Mini, 30: Full-size]
+
+// Card height
+height = 6.9;
+// Card width
+width = 30;
 
 // For no base, set this to value smaller than USB-C plug depth:
 base_depth = 7.5;
 
-// For printing on the Anycubic Vyper in PLA:
-// plug_padding = 1.13;
-// Default:
-plug_padding = 1.03;
-usb_c_plug_width = 8.25 * plug_padding;
-usb_c_plug_height = 2.4 * plug_padding;
+usb_c_plug_width = 8.25;
+usb_c_plug_height = 2.4;
 usb_c_plug_depth = 6.5;
 
+// How many slots should the stand have.
 slots = 1;
+
+// Pick fits. If the tolerances are too tight for your printer/filament, here's
+// where to start modifications.
+height_fit = height + fit;
+width_fit = width + fit;
+
+usb_c_plug_width_fit = usb_c_plug_width + tight_fit;
+usb_c_plug_height_fit = usb_c_plug_height + tight_fit;
+// For printing on the Anycubic Vyper in PLA:
+// usb_c_plug_width_fit = usb_c_plug_width + loose_fit;
+// usb_c_plug_height_fit = usb_c_plug_height + loose_fit;
 
 module usb_c_plug () {
   hull () {
-    cylinder (usb_c_plug_depth, usb_c_plug_height / 2, usb_c_plug_height / 2);
-    translate([0, usb_c_plug_width - usb_c_plug_height, 0])
-      cylinder (usb_c_plug_depth, usb_c_plug_height / 2, usb_c_plug_height / 2);
+    cylinder (usb_c_plug_depth, usb_c_plug_height_fit / 2, usb_c_plug_height_fit / 2); 
+    translate([0, usb_c_plug_width_fit - usb_c_plug_height_fit, 0]) 
+      cylinder (usb_c_plug_depth, usb_c_plug_height_fit / 2, usb_c_plug_height_fit / 2); 
   }
 }
 
 module slot_base () {
   difference () {
     cube([height + wall_thickness * 2, width + wall_thickness * 2, base_depth]);
-    translate([wall_thickness + (height / 2), wall_thickness + ((width - usb_c_plug_width + usb_c_plug_height) / 2), base_depth - usb_c_plug_depth])
+    translate([wall_thickness + (height / 2), wall_thickness + ((width - usb_c_plug_width_fit + usb_c_plug_height_fit) / 2), base_depth - usb_c_plug_depth]) 
       usb_c_plug();
   }
 }
@@ -48,9 +54,9 @@ module slot () {
   slot_base();
   translate([0, 0, base_depth])
     difference () {
-      cube([height + wall_thickness * 2, width + wall_thickness * 2, depth]);
+      cube([height_fit + wall_thickness * 2, width_fit + wall_thickness * 2, depth]);
       translate([wall_thickness, wall_thickness])
-        cube([height, width, depth]);
+        cube([height_fit, width_fit, depth]);
     };
 }
 
